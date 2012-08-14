@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=1024, user-scalable=no">
+
+	<title>PlayN </title>
+	
+	<!-- Required stylesheet -->
+	<link rel="stylesheet" href="core/deck.core.css">
+	<link rel="stylesheet" href="extensions/codemirror/deck.codemirror.css">
+	<!-- Extension CSS files go here. Remove or add as needed. -->
+	<link rel="stylesheet" href="extensions/goto/deck.goto.css">
+	<link rel="stylesheet" href="extensions/menu/deck.menu.css">
+
+	<link rel="stylesheet" href="extensions/status/deck.status.css">
+	<link rel="stylesheet" href="extensions/hash/deck.hash.css">
+	<link rel="stylesheet" href="extensions/scale/deck.scale.css">
+
+	<!-- Style theme. More available in /themes/style/ or create your own. -->
+	<link rel="stylesheet" href="themes/style/neon.css">
+	
+	<!-- Transition theme. More available in /themes/transition/ or create your own. -->
+	<link rel="stylesheet" href="themes/transition/horizontal-slide.css">
+	
+	<!-- Required Modernizr file -->
+	<script src="modernizr.custom.js"></script>
+
+	<!-- Syntax Highlight-->
+	<link href="google-code-prettify/sons-of-obsidian.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
+
+	<!--Image -->
+	<link href="jsImgSlider/themes/1/js-image-slider.css" rel="stylesheet" type="text/css" />
+    <script src="jsImgSlider/themes/1/js-image-slider.js" type="text/javascript"></script>
+</head>
+<body class="deck-container" onload="prettyPrint()">
+
+<!-- Begin slides. Just make elements with a class of slide. -->
+
+<section class="slide" id="title-slide">
+
+		<h1>PlayN</h1>
+
+	</section>
+
+	<section class="slide" id="kickassgames">
+		<h2>One game. Many platforms.</h2>
+		
+			<li class="slide" id="extensions-goto">
+				<strong><h3>Code Once, Run Everywhere</h3></strong> 
+			</li>
+			<li class="slide" id="extensions-goto">
+				<strong><h3>N>5 Platforms</h3></strong> 
+			</li>
+			<li class="slide" id="extensions-goto">
+				<p>iOS, Android, Java, HTML5, Flash, More?.</p>
+			</li>	
+			<li class="slide" id="extensions-goto">
+				<strong><h3>OpenSource</h3></strong> Apache License 2.0
+			</li>
+
+
+		
+	</section>
+
+<section class="slide" id="kickassgames">
+		<h2>The Technology</h2>
+			<li class="slide" id="extensions-goto">
+				<strong><h3>GWT Compiler</h3></strong> 
+			</li>
+			<li class="slide" id="extensions-goto">
+				<strong><h3>OpenGL 2.0 Standards</h3></strong> 
+			</li>
+			<li class="slide" id="extensions-goto">
+				<strong><h3>Device Native Features</h3></strong> 
+			</li>
+			
+
+	</section>
+	<section class="slide" id="kickassgames">
+		<h2>Projects using <strong>PlayN</strong></h2>
+		<div id="slider" width="600">
+        <img src="jsImgSlider/images/AB.png" width="600" alt="Angry Birds, Chrome Edition (Rovio)"/>
+        <img src="jsImgSlider/images/FR.png" width="600" alt="Frogger (Konami)"/>
+        <img src="jsImgSlider/images/GG.jpg" width="600" alt="Green Grappler (DarkBits)"/>
+        <img src="jsImgSlider/images/PS.png" width="600" alt="Pyramid Solitaire Saga (King.com)"/>
+        <img src="jsImgSlider/images/EM.png" width="600" alt="Escape The Mine (502Studios)"/>
+
+    </div>
+
+</section>
+<section class="slide">
+	<h2>Platform APIs</h2>
+		
+			<li class="slide" id="extensions-goto">
+				<strong><h3>Input/Output</h3></strong> import static PlayN.*;
+			</li>
+			<li class="slide" id="extensions-goto">
+								<p>Graphics,Audio,Net.</p>
+			</li>
+			<li class="slide" id="extensions-goto">
+								<p>Pointer,Touch,Keyboard.</p>
+			</li>
+			<li class="slide" id="extensions-goto">
+				<strong><h3>Asset Managment</h3></strong>
+			</li>
+			<li class="slide" id="extensions-goto">
+								<p>Audio,Images,Text.</p>
+			</li>
+			
+
+	</section>
+</section>
+
+<section class="slide">
+	<h2>Game Interface</h2>
+<pre class="prettyprint">
+public interface Game {
+
+  void init();
+
+  void update(float delta);
+
+  void paint(float alpha);
+
+  int updateRate();
+}
+</pre>
+</section>
+
+<section class="slide">
+	<h2>Rendering</h2>
+	<h3>Layer System</h3>
+	<img src="playN-layers-diagram.png" alt="game" height=400>
+
+</section>
+
+<section class="slide">
+	<h2>Graphics Architecture</h2>
+<li class="slide" id="extensions-goto">
+				<strong><h3>ImageLayer</h3></strong> 
+</li>
+<li class="slide" id="extensions-goto">
+				<strong><h3>ImmediateLayer & SurfaceLayer</h3></strong> 
+</li>
+<li class="slide" id="extensions-goto">
+				<strong><h3>Image & Canvas</h3></strong> 
+</li>
+</section>
+
+
+<section class="slide">
+	<h1>Invaders From Space</h1>
+</section>
+
+<section class="slide">
+<h2>スペースインベーダー</h2>
+	<img src="Invaders.gif" alt="game" height=400>
+ 1978, Tomohiro Nishikado
+</section>
+
+<section class="slide">
+<h2>The "World"</h2>
+				<strong><h3>Implements Game Loop</h3></strong> 
+				<strong><h3>Entity Container</h3></strong> 
+				<strong><h3>Resolves Logic</h3></strong> 
+</section>
+
+<section class="slide">
+<h2>The Game World</h2>
+<pre class="prettyprint">
+public List<Enemy> enemigos=new ArrayList<Enemy>();
+public List<Bullet> balas=new ArrayList<Bullet>();
+public void Init(){
+		keyboard().setListener(new Keyboard.Listener() {}
+		pointer().setListener(new Pointer.Listener() {}
+layer = graphics().createImmediateLayer(graphics().screenWidth(),
+	graphics().screenHeight(), new ImmediateLayer.Renderer() {
+	@Override
+		public void render(Surface surface) {
+		Draw(surface);}});
+layer.setAlpha(1f);
+		graphics().rootLayer().add(layer);
+		player=new Player(graphics().width()/2,(int) (graphics().height()-50),this);
+		EnemyFormation();
+}
+</pre>
+</section>
+
+<section class="slide">
+<h2>The Game World</h2>
+<pre class="prettyprint">
+public void Update(float delta){
+	for(Enemy en:enemigos){
+		en.Update(delta);
+	}
+	for(Bullet en:balas){
+		en.Update(delta);
+	}
+}
+</pre>
+</section>
+
+<section class="slide">
+<h2>The Game World</h2>
+<pre class="prettyprint">
+public void Draw(Surface surf){
+for(Enemy en:enemigos){
+	surf.drawImage(en.getTexture(), en.getPositionX(), en.getPositionY());
+}
+for(Bullet en:balas){
+	surf.drawImage(en.getTexture(), en.getPositionX(), en.getPositionY());
+}
+	surf.drawImage(getPlayer().getTexture(), getPlayer().getPositionX(), getPlayer().getPositionY());
+}
+</pre>
+</section>
+
+
+<section class="slide">
+<h2>Game Objects</h2>
+<img src="invader1.png" alt="game">
+<pre class="prettyprint">
+public abstract class Entity {
+float PosX,PosY,Width,Height;
+	Image Texture;
+	public String Name;
+	public boolean remove;
+	//Metodos para obtener y poner la posicion del objeto
+	public abstract void setPosition(float x, float y);
+	public abstract float getPositionX();
+	public abstract float getPositionY();
+	public abstract void Update(float delta);
+	public abstract Rectangle CollisionRectangle();
+}
+</pre>
+</section>
+
+
+
+<section class="slide">
+<h2>World with Objects</h2>
+<iframe
+height="700" 
+width="900" 
+src="http://1.ifsusac.appspot.com/">
+</iframe>
+</section>
+
+
+<section class="slide">
+<h2>Moving Around</h2>
+<pre class="prettyprint">
+public void onKeyDown(playn.core.Keyboard.Event event) {
+	if (event.key() == Key.LEFT) {
+		left=true;
+	}
+	if (event.key() == Key.RIGHT) {
+		right=true;
+	}
+}
+</pre>
+</section>
+
+<section class="slide">
+<h2>Moving Around</h2>
+<iframe
+height="700" 
+width="900" 
+src="http://1.ifsusac.appspot.com/">
+</iframe>
+</section>
+
+
+<section class="slide">
+<h2>Moar Action!</h2>
+<pre class="prettyprint">
+if (event.key() == Key.X) {
+	getPlayer().Shoot();
+}
+
+public void Shoot(){
+	if(CanShoot){
+		world.balas.add(new Bullet((int)(getPositionX()+getTexture().width()/2),(int)getPositionY(),"playerbullet"));
+		CanShoot=false;
+	}
+}
+</pre>
+</section>
+
+<section class="slide">
+<h2>Move n' Shoot</h2>
+<iframe
+height="700" 
+width="900" 
+src="http://2.ifsusac.appspot.com/">
+</iframe>
+</section>
+
+<section class="slide">
+<h2>Enemy Behaivor</h2>
+<pre class="prettyprint">
+if(World.EnemyMov>0){
+	setPositionX(getPositionX()+World.EnemyMov);
+		if(getPositionX()+getTexture().width()>=graphics().width()){
+			World.HitTheWall(-1);
+		}
+}
+public void HitTheWall(float vel){
+	EnemyMov*=vel;
+	for(Enemy en:enemigos){
+		en.setPositionY(en.getPositionY()+10);
+	}
+}
+</pre>
+</section>
+
+<section class="slide">
+<h2>CollisionDetection</h2>
+	<img src="enemyCollArea.png" alt="game" height=150>
+Rectangle Overlap
+<pre class="prettyprint">
+public boolean Intersects(Rectangle r) {
+	return !(Left() > r.Right() || Top() > r.Bottom() || Right() < r.Left() || Bottom() < r.Top());
+</pre>
+</section>
+<section class="slide">
+<h2>Checking Collisions</h2>
+<pre class="prettyprint">
+public void Collisions(){
+	for(Bullet bul:balas){
+		if(bul.Name.equalsIgnoreCase("playerbullet")){
+			for(Enemy en:enemigos){
+				if(bul.CollisionRectangle().Intersects(en.CollisionRectangle())){
+					addScore(Integer.parseInt(en.Name)*100);
+					en.remove=true;
+					bul.remove=true;
+					getPlayer().CanShoot=true;
+				break;
+				}
+			}
+		}
+	}
+}
+</pre>
+</section>
+
+<section class="slide">
+<h2>It's Alive!!!</h2>
+<iframe
+height="700" 
+width="900" 
+src="http://3.ifsusac.appspot.com/">
+</iframe>
+</section>
+
+<section class="slide">
+<h2>Showing Player Score</h2>
+<pre class="prettyprint">
+public int getScore(){
+	return this.Score;}
+
+public void addScore(int v){
+	this.Score+=v;}
+</pre>
+<pre class="prettyprint">
+ScoreImage.canvas().clear();
+ScoreImage.canvas().setFillColor(0xffffffff);
+ScoreImage.canvas().drawText("Score: "+getScore(), 10f, 20f);
+</pre>
+</section>
+
+<section class="slide">
+<h2>Scores, Press to Play</h2>
+<iframe
+height="700" 
+width="900" 
+src="http://4.ifsusac.appspot.com/">
+</iframe>
+</section>
+<section class="slide">
+<h2>Play it!</h2>
+<strong><h3>http://ifsusac.appspot.com/</h3></strong>
+
+</section>
+<section class="slide">
+<h2>Anything else?</h2>
+<strong><h3>Your turn</h3></strong>
+				<p>Difficulty level, Enemy Attack</p>
+				<p>Sound, Animations.</p>
+				<strong><h3>Download PlayN</h3></strong> <strong>git clone https://code.google.com/p/playn</strong>
+				<strong><h3>Use The SOURCE</h3></strong><strong>git clone https://github.com/riktothepast/InvadersFromSpace.git</strong>
+				
+</section>
+
+<section class="slide">
+<h2>Thank You!</h2>
+				<strong>Ricardo Illescas</strong> 
+				<p>GameDesigner @ 502Studios<p>
+				<p>rik@502Studios.net</p>
+				<p>@riktothepast</p>
+				<p>www.502Studios.net</p>
+</section>
+
+<!-- End slides. -->
+
+
+<!-- Begin extension snippets. Add or remove as needed. -->
+
+<!-- deck.navigation snippet -->
+<a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+<a href="#" class="deck-next-link" title="Next">&#8594;</a>
+
+<!-- deck.status snippet -->
+<p class="deck-status">
+	<span class="deck-status-current"></span>
+	
+	<span class="deck-status-total"></span>
+</p>
+
+<!-- deck.goto snippet -->
+<form action="." method="get" class="goto-form">
+	<label for="goto-slide">Go to slide:</label>
+	<input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+	<datalist id="goto-datalist"></datalist>
+	<input type="submit" value="Go">
+</form>
+
+<!-- deck.hash snippet -->
+<a href="." title="Permalink to this slide" class="deck-permalink">#</a>
+
+<!-- End extension snippets. -->
+
+
+<!-- Required JS files. -->
+<script src="jquery-1.7.2.min.js"></script>
+<script src="core/deck.core.js"></script>
+
+<!-- Extension JS files. Add or remove as needed. -->
+<script src="../core/deck.core.js"></script>
+<script src="../extensions/hash/deck.hash.js"></script>
+<script src="../extensions/menu/deck.menu.js"></script>
+<script src="../extensions/goto/deck.goto.js"></script>
+<script src="../extensions/status/deck.status.js"></script>
+<script src="../extensions/navigation/deck.navigation.js"></script>
+<script src="../extensions/scale/deck.scale.js"></script>
+<link rel="stylesheet" href="../extensions/codemirror/deck.codemirror.css">
+
+
+<!-- Initialize the deck. You can put this in an external file if desired. -->
+<script>
+	$(function() {
+		$.deck('.slide');
+	});
+</script>
+</body>
+</html>

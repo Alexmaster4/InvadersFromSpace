@@ -58,7 +58,8 @@ public class Mundo {
 		keyboard().setListener(new Keyboard.Listener() {
 			@Override
 			public void onKeyDown(playn.core.Keyboard.Event event) {
-				// TODO Auto-generated method stub
+				
+				// Dependiendo que tecla oprimimos moveremos al jugador.
 				if (event.key() == Key.LEFT) {
 					left=true;
 				}
@@ -96,6 +97,10 @@ public class Mundo {
 				}else{
 					right=true;
 				}
+				if(event.y()<=graphics().height()/2){
+					getPlayer().Shoot();
+					left=right=false;
+				}
 			}
 			@Override
 			public void onPointerEnd(Event event) {
@@ -109,12 +114,14 @@ public class Mundo {
 					if(gameover)
 						Reset();
 				}else{
-					getPlayer().Shoot();
-					left=right=false;
+
 				}
 				
 			}
 		});
+		/*Usaremos una capa imediata, como se hablo, esta cuenta con un mejor rendimiento al dibujar las escenas
+		 * "a mano".
+		 */
 		layer = graphics().createImmediateLayer(graphics().screenWidth(),
 				graphics().screenHeight(), new ImmediateLayer.Renderer() {
 					@Override
@@ -129,9 +136,10 @@ public class Mundo {
 		Messages.canvas().setFillColor(0xffffffff);
 		Messages.canvas().drawText("GAME PAUSED, Shoot to begin", 10f, 20f
 				);
-		layer.setAlpha(1f);
-		
+		//agregamos nuestra capa a la capa raiz del juego.
+		layer.setAlpha(1f);		
 		graphics().rootLayer().add(layer);
+		//Creamos al jugador y agregamos enemigos.
 		player=new Player(graphics().width()/2,(int) (graphics().height()-50),this);
 		EnemyFormation();
 	}

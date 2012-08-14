@@ -14,7 +14,7 @@ public class InvadersFromSpace implements Game {
   @Override
   public void init() {  	  
     // create and add background image layer
-			graphics().setSize(800, 600);
+			graphics().setSize(800, 480);
 		
     Image bgImage = assets().getImage("images/bg.png");
     ImageLayer bgLayer = graphics().createImageLayer(bgImage);
