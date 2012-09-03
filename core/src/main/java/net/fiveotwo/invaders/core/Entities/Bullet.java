@@ -10,7 +10,7 @@ import playn.core.CanvasImage;
 import playn.core.Image;
 
 public class Bullet extends Entity {
-
+		Mundo world;
 	public Bullet(int x, int y, String who,Mundo worl){
 		/*
 		 * Dependiendo nuestro dispositivo puede que la imagen sea o mas grande o muy peque~na, por lo que haremos Scaling
@@ -21,10 +21,9 @@ public class Bullet extends Entity {
 		float sizeX=Texture.width()*worl.getScale();
 		float sizeY=Texture.height()*worl.getScale();
 		CanvasImage Image=graphics().createImage(sizeX, sizeY);
-		Image.canvas().setFillColor(0xffffffff);
 		Image.canvas().drawImage(Texture, 0, 0,sizeX, sizeY);
 		Texture=Image;
-		
+		world=worl;
 		setPosition(x-Texture.width()/2,y);
 	}
 	
@@ -62,10 +61,10 @@ public class Bullet extends Entity {
 	@Override
 	public void Update(float delta) {
 		if(Name.equalsIgnoreCase("playerbullet")){
-			setPositionY(getPositionY()-10f);
+			setPositionY(getPositionY()-10f*world.getScale());
 		}
 		if(Name.equalsIgnoreCase("enemybullet")){
-			setPositionY(getPositionY()+10f);
+			setPositionY(getPositionY()+10f*world.getScale());
 		}
 			
 	}

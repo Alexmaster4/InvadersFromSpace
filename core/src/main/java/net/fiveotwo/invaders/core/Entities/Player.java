@@ -21,7 +21,7 @@ public class Player extends Entity{
 		float sizeX=Texture.width()*world.getScale();
 		float sizeY=Texture.height()*world.getScale();
 		CanvasImage Image=graphics().createImage(sizeX, sizeY);
-		Image.canvas().setFillColor(0xffffffff);
+
 		Image.canvas().drawImage(Texture, 0, 0,sizeX, sizeY);
 		Texture=Image;
 		this.PosX=x;
@@ -61,10 +61,10 @@ public class Player extends Entity{
 	@Override
 	public void Update(float delta) {
 		if(world.left){
-			setPositionX(getPositionX()-5f);
+			setPositionX(getPositionX()-5f*world.getScale());
 		}
 		if(world.right){
-			setPositionX(getPositionX()+5f);
+			setPositionX(getPositionX()+5f*world.getScale());
 		}
 		//Evitemos salir del area visible
 		if(getPositionX()<0){

@@ -27,7 +27,7 @@ public class Mundo {
 	private ImmediateLayer layer;
 	public boolean left,right;
 	//podemos modificar EnemyMov para acelerar o disminuir el movimiento de nuestros enemigos
-	public float EnemyMov=0.7f;
+	public float EnemyMov;
 	public boolean hitLeft,hitRight;
 	int initialenemynumber;
 	boolean pause=true;
@@ -143,7 +143,7 @@ public class Mundo {
 		//agregamos nuestra capa a la capa raiz del juego.
 		layer.setAlpha(1f);		
 		scale=graphics().width()/800f;
-
+		EnemyMov=0.7f*getScale();
 		graphics().rootLayer().add(layer);
 		//Creamos al jugador y agregamos enemigos.
 		player=new Player(graphics().width()/2,(int) (graphics().height()-assets().getImage("images/ship.png").height()*2),this);

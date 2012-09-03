@@ -20,7 +20,6 @@ public class Enemy extends Entity{
 		float sizeX=Texture.width()*worl.getScale();
 		float sizeY=Texture.height()*worl.getScale();
 		CanvasImage Image=graphics().createImage(sizeX, sizeY);
-		Image.canvas().setFillColor(0xffffffff);
 		Image.canvas().drawImage(Texture, 0, 0,sizeX, sizeY);
 		Texture=Image;
 		this.PosX=x-Texture.width()/2;
