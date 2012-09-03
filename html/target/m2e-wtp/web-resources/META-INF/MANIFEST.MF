@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
 Built-By: rik
-Build-Jdk: 1.7.0_05
+Build-Jdk: 1.7.0_06
 Created-By: Maven Integration for Eclipse
 
