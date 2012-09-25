@@ -244,7 +244,7 @@ function invadersfromspace(){
   $stats && $stats({moduleName:'invadersfromspace', sessionId:$sessionId_0, subSystem:'startup', evtGroup:'bootstrap', millis:(new Date).getTime(), type:'selectingPermutation'});
   if (!isHostedMode()) {
     try {
-      strongName = 'DA16A1028E256FC30F19127E9F7AC673';
+      strongName = '588B24AF279E3326E8DB68CC7508ABAB';
       var idx = strongName.indexOf(':');
       if (idx != -1) {
         softPermutationId = Number(strongName.substring(idx + 1));

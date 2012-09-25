@@ -9,6 +9,6 @@ public class InvadersFromSpaceJava {
   public static void main(String[] args) {
     JavaPlatform platform = JavaPlatform.register();
     platform.assets().setPathPrefix("net/fiveotwo/invaders/resources");
-    PlayN.run(new InvadersFromSpace());
+    PlayN.run(new InvadersFromSpace(null));
   }
 }

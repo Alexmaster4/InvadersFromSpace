@@ -2,8 +2,8 @@ package net.fiveotwo.invaders.core.Entities;
 /* Codigo de la presentacion de desarrollo multiplataforma con PlayN, USAC agosto 2012
  * @ Ricardo Illescas, 502Studios
  */
-import static playn.core.PlayN.assets;
 import static playn.core.PlayN.graphics;
+import net.fiveotwo.invaders.core.InvadersFromSpace;
 import net.fiveotwo.invaders.core.Mundo;
 import net.fiveotwo.invaders.core.Utilities.Rectangle;
 import playn.core.CanvasImage;
@@ -16,7 +16,10 @@ public class Enemy extends Entity{
 		 * Dependiendo nuestro dispositivo puede que la imagen sea o mas grande o muy peque~na, por lo que haremos Scaling
 		 * Lo ideal es tener sets de Sprites de diferentes resoluciones para cada pantalla, pero esto funcionara.
 		 */
-		this.Texture=assets().getImage("images/invader"+type+".png");
+		if(type==2)
+			this.Texture=InvadersFromSpace.inv2;
+		if(type==4)
+			this.Texture=InvadersFromSpace.inv4;
 		float sizeX=Texture.width()*worl.getScale();
 		float sizeY=Texture.height()*worl.getScale();
 		CanvasImage Image=graphics().createImage(sizeX, sizeY);
@@ -46,13 +49,11 @@ public class Enemy extends Entity{
 
 	@Override
 	public float getPositionX() {
-		// TODO Auto-generated method stub
 		return this.PosX;
 	}
 
 	@Override
 	public float getPositionY() {
-		// TODO Auto-generated method stub
 		return this.PosY;
 	}
 
@@ -74,13 +75,11 @@ public class Enemy extends Entity{
 
 	@Override
 	public Image getTexture() {
-		// TODO Auto-generated method stub
 		return this.Texture;
 	}
 
 	@Override
 	public void Shoot() {
-		// TODO Auto-generated method stub
 		
 	}
 

@@ -1,9 +1,9 @@
 package net.fiveotwo.invaders.core.Entities;
-/* Codigo de la presentacion de desarrollo multiplataforma con PlayN, USAC agosto 2012
+/* Codigo de la presentacion de desarrollo multiplataforma con PlayN, COECYS USAC agosto 2012
  * @ Ricardo Illescas, 502Studios
  */
-import static playn.core.PlayN.assets;
 import static playn.core.PlayN.graphics;
+import net.fiveotwo.invaders.core.InvadersFromSpace;
 import net.fiveotwo.invaders.core.Mundo;
 import net.fiveotwo.invaders.core.Utilities.Rectangle;
 import playn.core.CanvasImage;
@@ -17,7 +17,7 @@ public class Player extends Entity{
 		 * Dependiendo nuestro dispositivo puede que la imagen sea o mas grande o muy peque~na, por lo que haremos Scaling
 		 * Lo ideal es tener sets de Sprites de diferentes resoluciones para cada pantalla, pero esto funcionara.
 		 */
-		this.Texture=assets().getImage("images/ship.png");
+			this.Texture=InvadersFromSpace.ship;
 		float sizeX=Texture.width()*world.getScale();
 		float sizeY=Texture.height()*world.getScale();
 		CanvasImage Image=graphics().createImage(sizeX, sizeY);

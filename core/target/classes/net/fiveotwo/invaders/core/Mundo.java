@@ -1,5 +1,5 @@
 package net.fiveotwo.invaders.core;
-/* Codigo de la presentacion de desarrollo multiplataforma con PlayN, USAC agosto 2012
+/* Codigo de la presentacion de desarrollo multiplataforma con PlayN, COECYS USAC agosto 2012
  * @ Ricardo Illescas, 502Studios
  */
 import static playn.core.PlayN.graphics;
@@ -10,11 +10,14 @@ import java.util.List;
 import net.fiveotwo.invaders.core.Entities.Bullet;
 import net.fiveotwo.invaders.core.Entities.Enemy;
 import net.fiveotwo.invaders.core.Entities.Player;
+import net.fiveotwo.invaders.core.Utilities.Accel;
 import playn.core.CanvasImage;
+import playn.core.Image;
 import playn.core.ImmediateLayer;
 import playn.core.Key;
 import playn.core.Keyboard;
 import playn.core.Keyboard.TypedEvent;
+import playn.core.Platform.Type;
 import playn.core.Pointer;
 import playn.core.Pointer.Event;
 import playn.core.Surface;
@@ -23,18 +26,22 @@ public class Mundo {
 	public List<Enemy> enemigos=new ArrayList<Enemy>();
 	public List<Bullet> balas=new ArrayList<Bullet>();
 	CanvasImage ScoreImage,Messages;
+	Image lt,rt,fr;
 	Player player;
 	private ImmediateLayer layer;
 	public boolean left,right;
 	//podemos modificar EnemyMov para acelerar o disminuir el movimiento de nuestros enemigos
-	public float EnemyMov=0.7f;
+	public float EnemyMov;
 	public boolean hitLeft,hitRight;
 	int initialenemynumber;
 	boolean pause=true;
 	boolean gameover;
 	int Score;
 	public float scale;
-	public Mundo(){
+	Accel Acelerometer;
+	
+	public Mundo(Accel ac){
+		Acelerometer=ac;
 	}
 	
 	/*
@@ -47,7 +54,7 @@ public class Mundo {
 		this.Score+=v;
 	}
 	/*
-	 * Agregamos listeners para teclado y puntero. Estos metodos se sobrecargar para poder leer estos dispoistivos de entrada siempre
+	 * Agregamos listeners para teclado y puntero. Estos metodos se sobrecargar para poder leer estos dispositivos de entrada siempre
 	 * dentro de sus metodos start, end podemos definir distintas logicas para el juego
 	 * 
 	 * Crearemos un nuevo Layer inmediato para dibujar en pantalla.
@@ -55,7 +62,7 @@ public class Mundo {
 	 * Creamos un "jugador" nuevo y agregamos enemigos.
 	 */
 	public void Init(){
-		
+
 		keyboard().setListener(new Keyboard.Listener() {
 			@Override
 			public void onKeyDown(playn.core.Keyboard.Event event) {
@@ -78,8 +85,12 @@ public class Mundo {
 				}
 				//Si presionamos "back" en el movil, cerramos la aplicacion
 				if (event.key() == Key.BACK) {
-					System.exit(0);
-				}
+					if(pause){
+						//System.exit(0);
+					}else{
+						pause=true;
+					}
+			}
 			}
 			@Override
 			public void onKeyTyped(TypedEvent event) {
@@ -97,19 +108,10 @@ public class Mundo {
 		pointer().setListener(new Pointer.Listener() {
 			@Override
 			public void onPointerStart(Event event) {
-				if(event.x()<=graphics().width()/2){
-					left=true;
-				}else{
-					right=true;
-				}
-				if(event.y()<=graphics().height()/2){
-					getPlayer().Shoot();
-					left=right=false;
-				}
+				getPlayer().Shoot();
 			}
 			@Override
 			public void onPointerEnd(Event event) {
-				left=right=false;
 			}
 			@Override
 			public void onPointerDrag(Event event) {
@@ -123,6 +125,11 @@ public class Mundo {
 				}
 			}
 		});
+		
+		if (platformType() == Type.ANDROID) {
+			Acelerometer.start();
+		}
+		
 		/*Usaremos una capa imediata, como se hablo, esta cuenta con un mejor rendimiento al dibujar las escenas
 		 * "a mano".
 		 */
@@ -130,6 +137,7 @@ public class Mundo {
 				graphics().screenHeight(), new ImmediateLayer.Renderer() {
 					@Override
 					public void render(Surface surface) {
+						
 							Draw(surface);
 					}
 				});
@@ -143,12 +151,14 @@ public class Mundo {
 		//agregamos nuestra capa a la capa raiz del juego.
 		layer.setAlpha(1f);		
 		scale=graphics().width()/800f;
-
+		EnemyMov=0.7f*getScale();
 		graphics().rootLayer().add(layer);
 		//Creamos al jugador y agregamos enemigos.
-		player=new Player(graphics().width()/2,(int) (graphics().height()-assets().getImage("images/ship.png").height()*2),this);
+		player=new Player(graphics().width()/2,(int) (graphics().height()-assets().getImage("images/ship.png").height()*this.scale),this);
 		EnemyFormation();
+
 	}
+	
 	/*
 	 * Actualiza la logica de nuestro jugador
 	 * Actualiza nuestras listas de objetos (Enemigos, Balas)
@@ -170,7 +180,7 @@ public class Mundo {
 				enemigos.remove(en);
 				break;
 			}
-		}
+	}
 		for(Bullet en:balas){
 			if (!en.remove) {
 				en.Update(delta);
@@ -178,10 +188,14 @@ public class Mundo {
 					getPlayer().CanShoot=true;
 					en.remove=true;
 				}
-			} else {
+		} else {
 				balas.remove(en);
 				break;
 			}
+		}
+		
+		if (platformType() == Type.ANDROID) {
+		getPlayer().setPositionX(getPlayer().getPositionX()+Acelerometer.getY());
 		}
 		getPlayer().Update(delta);
 		Collisions();
@@ -191,9 +205,9 @@ public class Mundo {
 		if(enemigos.size()==0){
 			Messages.canvas().clear();
 			Messages.canvas().setFillColor(0xffffffff);
-			Messages.canvas().drawText("You Win, Shoot to begin", 10f, 20f);
-			pause=gameover=true;
-		}
+		Messages.canvas().drawText("You Win, Shoot to begin", 10f, 20f);
+		pause=gameover=true;
+	}
 		}
 	}
 	/*
@@ -214,6 +228,13 @@ public class Mundo {
 
 		surf.drawImage(getPlayer().getTexture(), getPlayer().getPositionX(), getPlayer().getPositionY());
 	}
+	
+	/*
+	 * Touch Controls for mobile devices
+	 */
+
+	
+	
 	/*
 	 * Recorremos nuestra lista de balas y lista de enemigos en busca de intersecciones entre rectangulos, en caso de haberlas
 	 * procedemos a eliminar los 2 objetos de las listas y habilitamos el disparo del jugador.

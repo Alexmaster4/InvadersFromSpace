@@ -1,5 +1,5 @@
 package net.fiveotwo.invaders.core.Entities;
-/* Codigo de la presentacion de desarrollo multiplataforma con PlayN, USAC agosto 2012
+/* Codigo de la presentacion de desarrollo multiplataforma con PlayN,COECYS USAC agosto 2012
  * @ Ricardo Illescas, 502Studios
  */
 import net.fiveotwo.invaders.core.Utilities.Rectangle;

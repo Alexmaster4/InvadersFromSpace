@@ -10,6 +10,7 @@ public class InvadersFromSpaceActivity extends GameActivity {
   @Override
   public void main(){
     platform().assets().setPathPrefix("net/fiveotwo/invaders/resources");
-    PlayN.run(new InvadersFromSpace());
+    AndroidAccelerometer Accel=new AndroidAccelerometer(this);
+    PlayN.run(new InvadersFromSpace(Accel));
   }
 }

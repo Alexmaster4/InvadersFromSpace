@@ -12,6 +12,6 @@ public class InvadersFromSpaceHtml extends HtmlGame {
   public void start() {
     HtmlPlatform platform = HtmlPlatform.register();
     platform.assets().setPathPrefix("invadersfromspace/");
-    PlayN.run(new InvadersFromSpace());
+    PlayN.run(new InvadersFromSpace(null));
   }
 }
