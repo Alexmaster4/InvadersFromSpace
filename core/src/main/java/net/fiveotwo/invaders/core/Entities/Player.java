@@ -18,8 +18,8 @@ public class Player extends Entity{
 		 * Lo ideal es tener sets de Sprites de diferentes resoluciones para cada pantalla, pero esto funcionara.
 		 */
 			this.Texture=InvadersFromSpace.ship;
-		float sizeX=Texture.width()*world.getScale();
-		float sizeY=Texture.height()*world.getScale();
+		float sizeX=Texture.width();
+		float sizeY=Texture.height();
 		CanvasImage Image=graphics().createImage(sizeX, sizeY);
 
 		Image.canvas().drawImage(Texture, 0, 0,sizeX, sizeY);
@@ -61,10 +61,10 @@ public class Player extends Entity{
 	@Override
 	public void Update(float delta) {
 		if(world.left){
-			setPositionX(getPositionX()-5f*world.getScale());
+			setPositionX(getPositionX()-5f);
 		}
 		if(world.right){
-			setPositionX(getPositionX()+5f*world.getScale());
+			setPositionX(getPositionX()+5f);
 		}
 		//Evitemos salir del area visible
 		if(getPositionX()<0){

@@ -10,6 +10,7 @@ import playn.core.ImageLayer;
 import playn.core.Platform.Type;
 import playn.core.ResourceCallback;
 
+
 public class InvadersFromSpace implements Game {
 	float UpdateRate;
 	public static double scale;
@@ -21,15 +22,20 @@ public class InvadersFromSpace implements Game {
 	}
 	  
   @Override
-  public void init() {  	  
+  public void init() {  	
+	  int WIDTH = 800;
+	  int HEIGHT = 600;
     platformType();
-
 	// Si es un dispositivo movil, ocuparemos toda la pantalla, de lo contrario tendremos un tama~no fijo.
 	  if (platformType() == Type.ANDROID||platformType() == Type.IOS) {
-			graphics().setSize(graphics().screenWidth(), graphics().screenHeight());
-		}else{			
-			graphics().setSize(640, 480);
-		}
+			platformType();	
+			if ((platformType() == Type.ANDROID)||(platformType() == Type.IOS)){
+				graphics().rootLayer().setScale(graphics().screenWidth()/WIDTH, graphics().screenHeight()/HEIGHT);
+			}
+		}else{
+			graphics().setSize(800, 600);
+		}		
+		
 	//Cargamos las imagenes usando un callback para evitar problemas Async con js
 	  assets().getImage("images/bg.png").addCallback(new ResourceCallback<Image>(){
 			@Override
@@ -37,7 +43,6 @@ public class InvadersFromSpace implements Game {
 				// TODO Auto-generated method stub
 			    Image bgImage = resource;
 			    ImageLayer bgLayer = graphics().createImageLayer(bgImage);
-			    bgLayer.setSize(graphics().width(), graphics().height());
 			    graphics().rootLayer().add(bgLayer);
 			    
 			    assets().getImage("images/invader4.png").addCallback(new ResourceCallback<Image>(){

@@ -37,7 +37,6 @@ public class Mundo {
 	boolean pause=true;
 	boolean gameover;
 	int Score;
-	public float scale;
 	Accel Acelerometer;
 	
 	public Mundo(Accel ac){
@@ -133,11 +132,9 @@ public class Mundo {
 		/*Usaremos una capa imediata, como se hablo, esta cuenta con un mejor rendimiento al dibujar las escenas
 		 * "a mano".
 		 */
-		layer = graphics().createImmediateLayer(graphics().screenWidth(),
-				graphics().screenHeight(), new ImmediateLayer.Renderer() {
+		layer = graphics().createImmediateLayer(800,600, new ImmediateLayer.Renderer() {
 					@Override
 					public void render(Surface surface) {
-						
 							Draw(surface);
 					}
 				});
@@ -150,11 +147,10 @@ public class Mundo {
 				);
 		//agregamos nuestra capa a la capa raiz del juego.
 		layer.setAlpha(1f);		
-		scale=graphics().width()/800f;
-		EnemyMov=0.7f*getScale();
+		EnemyMov=0.7f;
 		graphics().rootLayer().add(layer);
 		//Creamos al jugador y agregamos enemigos.
-		player=new Player(graphics().width()/2,(int) (graphics().height()-assets().getImage("images/ship.png").height()*this.scale),this);
+		player=new Player(graphics().width()/2,(int) (graphics().height()-assets().getImage("images/ship.png").height()),this);
 		EnemyFormation();
 
 	}
@@ -275,31 +271,28 @@ public class Mundo {
 	}
 	//Agrega y ordena a los enemigos de la lista
 	public void EnemyFormation(){
-		int px=(int) (60*getScale());
-		int py=(int) (40*getScale());
+		int px=(int) (60);
+		int py=(int) (40);
 		for(int x=0;x<11;x++){
 			enemigos.add(new Enemy(px,py,4,this));
-			px+=65*getScale();
+			px+=65;
 			initialenemynumber+=1;
 		}
-		py+=50*getScale();
-		px=(int) (60*getScale());
+		py+=50;
+		px=(int) (60);
 		for(int x=0;x<11;x++){
 			enemigos.add(new Enemy(px,py,2,this));
-			px+=65*getScale();
+			px+=65;
 			initialenemynumber+=1;
 		}
-		py+=50*getScale();
-		px=(int) (60*getScale());
+		py+=50;
+		px=(int) (60);
 		for(int x=0;x<11;x++){
 			enemigos.add(new Enemy(px,py,2,this));
-			px+=65*getScale();
+			px+=65;
 			initialenemynumber+=1;
 		}
 	}
-	
-	public float getScale(){
-		return this.scale;
-	}
+
 	
 }

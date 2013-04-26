@@ -20,8 +20,8 @@ public class Enemy extends Entity{
 			this.Texture=InvadersFromSpace.inv2;
 		if(type==4)
 			this.Texture=InvadersFromSpace.inv4;
-		float sizeX=Texture.width()*worl.getScale();
-		float sizeY=Texture.height()*worl.getScale();
+		float sizeX=Texture.width();
+		float sizeY=Texture.height();
 		CanvasImage Image=graphics().createImage(sizeX, sizeY);
 		Image.canvas().drawImage(Texture, 0, 0,sizeX, sizeY);
 		Texture=Image;

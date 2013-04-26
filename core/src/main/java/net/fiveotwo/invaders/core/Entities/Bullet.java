@@ -18,8 +18,8 @@ public class Bullet extends Entity {
 		 */
 		this.Name=who;
 		this.Texture=InvadersFromSpace.bullet;
-		float sizeX=Texture.width()*worl.getScale();
-		float sizeY=Texture.height()*worl.getScale();
+		float sizeX=Texture.width();
+		float sizeY=Texture.height();
 		CanvasImage Image=graphics().createImage(sizeX, sizeY);
 		Image.canvas().drawImage(Texture, 0, 0,sizeX, sizeY);
 		Texture=Image;
@@ -61,10 +61,10 @@ public class Bullet extends Entity {
 	@Override
 	public void Update(float delta) {
 		if(Name.equalsIgnoreCase("playerbullet")){
-			setPositionY(getPositionY()-10f*world.getScale());
+			setPositionY(getPositionY()-10f);
 		}
 		if(Name.equalsIgnoreCase("enemybullet")){
-			setPositionY(getPositionY()+10f*world.getScale());
+			setPositionY(getPositionY()+10f);
 		}
 			
 	}
